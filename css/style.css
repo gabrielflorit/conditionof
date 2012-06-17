@@ -215,8 +215,47 @@ td { vertical-align: top; }
 
 
 /* ==|== primary styles =====================================================
-   Author:
+   Author: Gabriel Florit
    ========================================================================== */
+body {
+  background: #FFF;
+}
+
+  #sidebar {
+    position: relative;
+    width: 5%;
+    float: left;
+  }
+
+    #sidebar img {
+      margin-top: 0.8em;
+      width: 90%;
+      -moz-transform: scaleX(-1); /* Gecko */
+      -o-transform: scaleX(-1); /* Operah */
+      -webkit-transform: scaleX(-1); /* webkit */
+      transform: scaleX(-1); /* standard */
+      filter: FlipH; /* IE 6/7/8 */
+    }
+
+  #content {
+    position: relative;
+    width: 95%;
+    float: right;
+  }
+
+    #poem {
+      margin-left: 0.8em;
+      font-family: 'Gentium Book Basic', serif;
+      font-style: italic;
+      color: #666;
+      font-size: 2em;
+      line-height: 2em;
+    }
+
+    #highlight {
+      color: #222;
+      font-weight: 700;
+    }
 
 
 

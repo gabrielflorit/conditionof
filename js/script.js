@@ -4,10 +4,32 @@ var conditionOf = (function () {
 
 	return {
 
-		// resetBar: function(markerCenter) {
-		// },
+		createLines: function(reasons) {
 
-		// bar: null
+			var theString = '';
+
+			_.each(reasons, function(value, key, list) {
+				theString += value.reason + '\n';
+			});
+
+			return theString;
+		},
+
+		clickToken: function() {
+
+			var cursor = conditionOf.codeMirror.getCursor();
+			var token = conditionOf.codeMirror.getTokenAt(cursor);
+			var word = token.string;
+
+			// find reasons containing this word
+			var newReasons = _.filter(conditionOf.reasons, function(reason) {
+				return reason.reason.indexOf(word) != -1;
+			});
+
+			conditionOf.codeMirror.setValue(conditionOf.createLines(newReasons));
+		},
+
+		reasons: null
 	}
 
 }());
@@ -19,24 +41,20 @@ $(function() {
 
 		mode:  'javascript',
 
-		onCursorActivity: function(cm) {
+	});
 
-			var cursor = cm.getCursor();
-			var token = cm.getTokenAt(cursor);
-			$('#test').text(token.string);
-
-		}
+	$('#poem').on('click', function(e) {
+		console.log('click');
+		conditionOf.clickToken();
 	});
 
 	// load all the reasons in memory
-	var reasons = [
-		'for fear of alienating a landlord.',
-		'because of fears that he too could be kidnapped.',
-		'because the subject is politically sensitive.',
-		'because she lives alone'
-	];
+	var reasons = d3.json('js/data/reasons.json', function(data) {
 
-	conditionOf.codeMirror.setValue('for fear of alienating a landlord.\nbecause of fears that he too could be kidnapped.\n');
+		conditionOf.reasons = data;
+		conditionOf.codeMirror.setValue(conditionOf.createLines(data));
+
+	});
 
 });
 

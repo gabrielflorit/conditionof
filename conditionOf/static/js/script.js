@@ -7,14 +7,13 @@ var conditionOf = (function () {
 		createLines: function(reasons) {
 
 			var lineArray = [];
-			var i = 0;
+			var a = 0;
 
-			for (var a = 0; a < length; a++) {
-				lineArray[i++] = value.reason;
-				lineArray[i++] = '\n';
+			for (var i = 0; i < reasons.length; i++) {
+				lineArray[a++] = reasons[i].reason;
 			}
 
-			return lineArray.join('');
+			return lineArray.join('\n');
 		},
 
 		clickToken: function() {

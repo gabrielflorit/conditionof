@@ -6,13 +6,15 @@ var conditionOf = (function () {
 
 		createLines: function(reasons) {
 
-			var theString = '';
+			var lineArray = [];
+			var i = 0;
 
-			_.each(reasons, function(value, key, list) {
-				theString += value.reason + '\n';
-			});
+			for (var a = 0; a < length; a++) {
+				lineArray[i++] = value.reason;
+				lineArray[i++] = '\n';
+			}
 
-			return theString;
+			return lineArray.join('');
 		},
 
 		clickToken: function() {
@@ -38,7 +40,8 @@ $(function() {
 
 	// create codemirror instance
 	conditionOf.codeMirror = CodeMirror($('#poem').get(0), {
-		mode:  'javascript'
+		mode:  'javascript',
+		readOnly: true
 	});
 
 	$('#poem').on('click', function(e) {

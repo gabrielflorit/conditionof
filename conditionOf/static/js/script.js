@@ -24,7 +24,7 @@ var conditionOf = (function () {
 
 			// find reasons containing this word
 			var newReasons = _.filter(conditionOf.reasons, function(reason) {
-				return reason.reason.indexOf(word) != -1;
+				return reason.reason.toLowerCase().indexOf(word.toLowerCase()) != -1;
 			});
 
 			conditionOf.codeMirror.setValue(conditionOf.createLines(newReasons));

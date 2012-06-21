@@ -6,9 +6,24 @@ import json
 from conditionOf import app
 from flask import render_template, send_from_directory, request
 from werkzeug.contrib.atom import AtomFeed
+from flask_heroku import Heroku
 
 nyt_api_key = "b8e7be8d6a606fa1101a581d8b39e426:17:63577998"
 good_words = ['on', 'about', 'because', 'from', 'since', 'for', 'that', 'after', 'while', 'per', 'by', 'as', 'so', 'at', 'during', 'in', 'under', 'before', 'until', 'out']
+
+heroku = Heroku(app)
+def create_conn():
+    conn = None
+    if os.environ.has_key("DATABASE_URL"):
+        username = os.environ["DATABASE_URL"].split(":")[1].replace("//","")
+        password = os.environ["DATABASE_URL"].split(":")[2].split("@")[0]
+        host = os.environ["DATABASE_URL"].split(":")[2].split("@")[1].split("/")[0]
+        dbname = os.environ["DATABASE_URL"].split("/")[3]
+        conn = psycopg2.connect(dbname=dbname, user=username, password=password, host=host) 
+    else:
+        import sqlite3
+        conn = sqlite3.connect('/tmp/test.db')
+    return conn
 
 def is_url_new(url):
     conn = create_conn()

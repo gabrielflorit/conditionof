@@ -4,6 +4,7 @@ from flask_heroku import Heroku
 import psycopg2
 
 app = Flask(__name__)
+app.debug = True
 
 heroku = Heroku(app)
 def create_conn():

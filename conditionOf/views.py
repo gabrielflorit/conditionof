@@ -7,6 +7,7 @@ from conditionOf import app
 from flask import render_template, send_from_directory, request
 from werkzeug.contrib.atom import AtomFeed
 from flask_heroku import Heroku
+import psycopg2
 
 nyt_api_key = "b8e7be8d6a606fa1101a581d8b39e426:17:63577998"
 good_words = ['on', 'about', 'because', 'from', 'since', 'for', 'that', 'after', 'while', 'per', 'by', 'as', 'so', 'at', 'during', 'in', 'under', 'before', 'until', 'out']

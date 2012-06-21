@@ -55,8 +55,8 @@ def get_reasons():
 def init_db():
     conn = create_conn()
     cursor = conn.cursor()
-    cursor.execute("DROP TABLE urls_seen")
-    cursor.execute("DROP TABLE reasons")
+    cursor.execute("DROP TABLE IF EXISTS urls_seen")
+    cursor.execute("DROP TABLE IF EXISTS reasons")
     cursor.execute("CREATE TABLE urls_seen (url TEXT)")
     cursor.execute("CREATE TABLE reasons (id SERIAL, because TEXT, url TEXT)")
     conn.commit()

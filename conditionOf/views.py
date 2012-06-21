@@ -60,13 +60,15 @@ def init_db():
     cursor.execute("CREATE TABLE urls_seen (url TEXT)")
     cursor.execute("CREATE TABLE reasons (id SERIAL, because TEXT, url TEXT)")
     conn.commit()
-    headers.append(('Content-Type', 'application/json'))
-    return json.dumps({"init":"success"})
+    response = make_response(json.dumps({"init":"success"}))
+    response.headers['Content-Type'] = 'application/json'
+    return response
 
 @app.route('/reasons')
 def getjson():
-    headers.append(('Content-Type', 'application/json'))
-    return json.dumps(get_reasons()) 
+    response = make_response(json.dumps(get_reasons()))
+    response.headers['Content-Type'] = 'application/json'
+    return response
     
 @app.route('/update')
 def update():
@@ -104,7 +106,10 @@ def update():
 def load():
     add_reason(request.form['because'], request.form['url'])
     headers.append(('Content-Type', 'application/json'))
-    return {"load":"success"}
+    response = make_response(json.dumps({"load":"success"}))
+    response.headers['Content-Type'] = 'application/json'
+    return response
+
 
 @app.route('/')
 def home():

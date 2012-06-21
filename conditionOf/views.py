@@ -105,7 +105,6 @@ def update():
 @app.route('/load', methods=['POST'])
 def load():
     add_reason(request.form['because'], request.form['url'])
-    headers.append(('Content-Type', 'application/json'))
     response = make_response(json.dumps({"load":"success"}))
     response.headers['Content-Type'] = 'application/json'
     return response

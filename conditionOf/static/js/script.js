@@ -48,7 +48,7 @@ $(function() {
 	});
 
 	// load all the reasons in memory
-	var reasons = d3.json('static/js/data/reasons.json', function(data) {
+	var reasons = d3.json('/reasons', function(data) {
 
 		conditionOf.reasons = data;
 		conditionOf.codeMirror.setValue(conditionOf.createLines(data));
